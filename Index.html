@@ -1,0 +1,1938 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Organisasi SMAN 1 Cikalongwetan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal {
+            backdrop-filter: blur(10px);
+        }
+        
+        .org-card {
+            transition: all 0.3s ease;
+        }
+        
+        .org-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen gradient-bg">
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div>
+                        <h1 class="text-lg md:text-xl font-bold text-gray-800 leading-tight">
+                            <span class="block md:inline">Manajemen Organisasi Intra dan</span>
+                            <span class="block md:inline">Ekstrakurikuler SMAN 1 Cikalongwetan</span>
+                        </h1>
+                    </div>
+                </div>
+                
+                <!-- Menu Button -->
+                <button id="menuBtn" class="bg-gradient-to-r from-green-500 to-blue-600 text-white p-3 rounded-full hover:shadow-lg transition-all duration-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Menu Dropdown -->
+    <div id="mainMenu" class="hidden fixed top-20 right-4 bg-white rounded-lg shadow-xl z-40 min-w-64">
+        <div class="p-2">
+            <button onclick="showProfilOrganisasi()" class="w-full text-left px-4 py-3 hover:bg-green-50 rounded-lg menu-item flex items-center space-x-3">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </div>
+                <span class="font-medium text-gray-700">Profil Organisasi</span>
+            </button>
+            
+            <button onclick="showPengajuan()" class="w-full text-left px-4 py-3 hover:bg-blue-50 rounded-lg menu-item flex items-center space-x-3">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </div>
+                <span class="font-medium text-gray-700">Pengajuan-Pengajuan</span>
+            </button>
+            
+            <button onclick="showLogAktivitas()" class="w-full text-left px-4 py-3 hover:bg-purple-50 rounded-lg menu-item flex items-center space-x-3">
+                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
+                <span class="font-medium text-gray-700">Log Aktivitas</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Welcome Section -->
+        <div id="welcomeSection" class="text-center text-white mb-12">
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 card-shadow">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Selamat Datang</h2>
+                <p class="text-lg md:text-xl opacity-90 mb-6">Sistem Manajemen Organisasi Intra dan Ekstrakurikuler</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-white/20 rounded-xl p-6 backdrop-blur-sm">
+                        <div class="text-3xl font-bold text-yellow-300">27</div>
+                        <div class="text-sm opacity-80">Total Organisasi</div>
+                    </div>
+                    <div class="bg-white/20 rounded-xl p-6 backdrop-blur-sm">
+                        <div class="text-3xl font-bold text-yellow-300">500+</div>
+                        <div class="text-sm opacity-80">Anggota Aktif</div>
+                    </div>
+                    <div class="bg-white/20 rounded-xl p-6 backdrop-blur-sm">
+                        <div class="text-3xl font-bold text-yellow-300">50+</div>
+                        <div class="text-sm opacity-80">Kegiatan/Tahun</div>
+                    </div>
+                </div>
+                
+                <!-- Program Kegiatan Bulan Ini -->
+                <div class="mt-8">
+                    <h3 class="text-2xl font-bold mb-6">Daftar Program Kegiatan Bulan Ini</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">OS</span>
+                                </div>
+                                <span class="font-semibold">OSIS</span>
+                            </div>
+                            <h4 class="font-medium mb-1">MPLS (Masa Pengenalan Lingkungan Sekolah)</h4>
+                            <p class="text-sm opacity-80">Kegiatan pengenalan untuk siswa baru</p>
+                        </div>
+                        
+                        <div class="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-8 h-8 bg-red-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">⛑️</span>
+                                </div>
+                                <span class="font-semibold">PMR</span>
+                            </div>
+                            <h4 class="font-medium mb-1">Pelatihan P3K Dasar</h4>
+                            <p class="text-sm opacity-80">Pelatihan pertolongan pertama pada kecelakaan</p>
+                        </div>
+                        
+                        <div class="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">🏕️</span>
+                                </div>
+                                <span class="font-semibold">Pramuka</span>
+                            </div>
+                            <h4 class="font-medium mb-1">Kemah Bakti</h4>
+                            <p class="text-sm opacity-80">Kegiatan kemah dan bakti sosial</p>
+                        </div>
+                        
+                        <div class="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-8 h-8 bg-purple-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">🎺</span>
+                                </div>
+                                <span class="font-semibold">Marching Band</span>
+                            </div>
+                            <h4 class="font-medium mb-1">Latihan Rutin</h4>
+                            <p class="text-sm opacity-80">Persiapan untuk kompetisi regional</p>
+                        </div>
+                        
+                        <div class="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-8 h-8 bg-orange-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">🏀</span>
+                                </div>
+                                <span class="font-semibold">Basket Ball</span>
+                            </div>
+                            <h4 class="font-medium mb-1">Turnamen Antar Kelas</h4>
+                            <p class="text-sm opacity-80">Kompetisi basket ball tingkat sekolah</p>
+                        </div>
+                        
+                        <div class="bg-white/20 rounded-xl p-4 backdrop-blur-sm">
+                            <div class="flex items-center space-x-3 mb-2">
+                                <div class="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-bold text-sm">⚽</span>
+                                </div>
+                                <span class="font-semibold">Futsal</span>
+                            </div>
+                            <h4 class="font-medium mb-1">Liga Futsal Sekolah</h4>
+                            <p class="text-sm opacity-80">Pertandingan futsal antar organisasi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profil Organisasi Section -->
+        <div id="profilOrganisasiSection" class="hidden fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Profil Organisasi</h2>
+                    <button onclick="hideAllSections()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Organisasi Cards -->
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('OSIS')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">OS</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">OSIS</h3>
+                                <p class="text-sm text-gray-600">Organisasi Siswa</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('MPK')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">MP</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">MPK</h3>
+                                <p class="text-sm text-gray-600">Majelis Permusyawaratan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('PASSUS')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">PS</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">PASSUS</h3>
+                                <p class="text-sm text-gray-600">Pasukan Khusus</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Pramuka Putra')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🏕️</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Pramuka Putra</h3>
+                                <p class="text-sm text-gray-600">Kepanduan Putra</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Pramuka Putri')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🏕️</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Pramuka Putri</h3>
+                                <p class="text-sm text-gray-600">Kepanduan Putri</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('PMR')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">⛑️</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">PMR</h3>
+                                <p class="text-sm text-gray-600">Palang Merah Remaja</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sports Organizations -->
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Basket ball')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🏀</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Basket Ball</h3>
+                                <p class="text-sm text-gray-600">Olahraga Bola Basket</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Futsal Putra')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">⚽</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Futsal Putra</h3>
+                                <p class="text-sm text-gray-600">Futsal Tim Putra</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Arts Organizations -->
+                    <div class="org-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Marching Band')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🎺</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Marching Band</h3>
+                                <p class="text-sm text-gray-600">Band Parade</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('HISSPA')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">HS</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">HISSPA</h3>
+                                <p class="text-sm text-gray-600">Himpunan Siswa Pecinta Alam</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('FSRI')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">FS</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">FSRI</h3>
+                                <p class="text-sm text-gray-600">Forum Studi dan Riset Islam</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('KIR')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">KI</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">KIR</h3>
+                                <p class="text-sm text-gray-600">Karya Ilmiah Remaja</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('AKSI')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">AK</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">AKSI</h3>
+                                <p class="text-sm text-gray-600">Aksi Sosial</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Paduan Suara')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🎵</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Paduan Suara</h3>
+                                <p class="text-sm text-gray-600">Choir</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Traditional Dance')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">💃</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Traditional Dance</h3>
+                                <p class="text-sm text-gray-600">Tari Tradisional</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Modern Dance')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🕺</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Modern Dance</h3>
+                                <p class="text-sm text-gray-600">Tari Modern</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('LCC')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">LC</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">LCC</h3>
+                                <p class="text-sm text-gray-600">Language and Culture Club</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('LSC')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">LS</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">LSC</h3>
+                                <p class="text-sm text-gray-600">Life Science Club</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('OLPRES')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🏃</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">OLPRES</h3>
+                                <p class="text-sm text-gray-600">Olahraga Prestasi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('OLTRAD')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🥋</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">OLTRAD</h3>
+                                <p class="text-sm text-gray-600">Olahraga Tradisional</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Judo')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🥋</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Judo</h3>
+                                <p class="text-sm text-gray-600">Seni Bela Diri Judo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('PD')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🥊</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">PD</h3>
+                                <p class="text-sm text-gray-600">Pencak Diri</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Volly ball')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🏐</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Volly Ball</h3>
+                                <p class="text-sm text-gray-600">Bola Voli</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Badminton')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">🏸</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Badminton</h3>
+                                <p class="text-sm text-gray-600">Bulu Tangkis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Futsal Putri')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">⚽</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Futsal Putri</h3>
+                                <p class="text-sm text-gray-600">Futsal Tim Putri</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="org-card bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-4 cursor-pointer card-shadow" onclick="showDetailOrganisasi('Media S1Cikal')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">📰</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Media S1Cikal</h3>
+                                <p class="text-sm text-gray-600">Media Sekolah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Organisasi Modal -->
+        <div id="detailOrganisasiModal" class="hidden fixed inset-0 bg-black/50 modal z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Detail Organisasi</h2>
+                        <div class="flex space-x-2">
+                            <button onclick="showLoginModal('edit')" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 flex items-center space-x-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                                <span>Edit</span>
+                            </button>
+                            <button onclick="hideDetailOrganisasi()" class="text-gray-500 hover:text-gray-700">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="detailOrganisasiContent">
+                        <!-- Content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pengajuan Section -->
+        <div id="pengajuanSection" class="hidden fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Pengajuan-Pengajuan</h2>
+                    <button onclick="hideAllSections()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="showLoginModal('proposal')">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800">Pengajuan Proposal Kegiatan</h3>
+                        </div>
+                        <p class="text-gray-600">Ajukan proposal untuk kegiatan organisasi Anda</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="showLoginModal('dispensasi')">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800">Pengajuan Dispensasi</h3>
+                        </div>
+                        <p class="text-gray-600">Ajukan dispensasi untuk kegiatan organisasi</p>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 cursor-pointer hover:shadow-lg transition-all duration-300" onclick="showLoginModal('laporan')">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-semibold text-gray-800">Laporan Kegiatan</h3>
+                        </div>
+                        <p class="text-gray-600">Upload laporan kegiatan yang telah dilaksanakan</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log Aktivitas Section -->
+        <div id="logAktivitasSection" class="hidden fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-6 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Log Aktivitas</h2>
+                    <button onclick="hideAllSections()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Akses Terbatas</h3>
+                    <p class="text-gray-600 mb-6">Silakan login untuk melihat log aktivitas sistem</p>
+                    <button onclick="showLoginModal('log')" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all duration-300">
+                        Login untuk Akses
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black/50 modal z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Login Required</h2>
+                <button onclick="hideLoginModal()" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form onsubmit="handleLogin(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                
+                <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-blue-600 text-white py-2 rounded-lg hover:shadow-lg transition-all duration-300">
+                    Login
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Form Modals -->
+    <div id="formModal" class="hidden fixed inset-0 bg-black/50 modal z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 id="formModalTitle" class="text-2xl font-bold text-gray-800"></h2>
+                    <button onclick="hideFormModal()" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div id="formModalContent">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLoginAction = '';
+        
+        // Toggle main menu
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mainMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('mainMenu');
+            const menuBtn = document.getElementById('menuBtn');
+            
+            if (!menu.contains(event.target) && !menuBtn.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        function hideAllSections() {
+            document.getElementById('welcomeSection').classList.remove('hidden');
+            document.getElementById('profilOrganisasiSection').classList.add('hidden');
+            document.getElementById('pengajuanSection').classList.add('hidden');
+            document.getElementById('logAktivitasSection').classList.add('hidden');
+            document.getElementById('mainMenu').classList.add('hidden');
+        }
+
+        function showProfilOrganisasi() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('pengajuanSection').classList.add('hidden');
+            document.getElementById('logAktivitasSection').classList.add('hidden');
+            document.getElementById('profilOrganisasiSection').classList.remove('hidden');
+            document.getElementById('mainMenu').classList.add('hidden');
+        }
+
+        function showPengajuan() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('profilOrganisasiSection').classList.add('hidden');
+            document.getElementById('logAktivitasSection').classList.add('hidden');
+            document.getElementById('pengajuanSection').classList.remove('hidden');
+            document.getElementById('mainMenu').classList.add('hidden');
+        }
+
+        function showLogAktivitas() {
+            document.getElementById('welcomeSection').classList.add('hidden');
+            document.getElementById('profilOrganisasiSection').classList.add('hidden');
+            document.getElementById('pengajuanSection').classList.add('hidden');
+            document.getElementById('logAktivitasSection').classList.remove('hidden');
+            document.getElementById('mainMenu').classList.add('hidden');
+        }
+
+        function showDetailOrganisasi(orgName) {
+            const modal = document.getElementById('detailOrganisasiModal');
+            const content = document.getElementById('detailOrganisasiContent');
+            
+            // Data lengkap semua organisasi
+            const orgData = {
+                'OSIS': {
+                    logo: '🏛️',
+                    nama: 'OSIS (Organisasi Siswa Intra Sekolah)',
+                    tahunBerdiri: '1982',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Organisasi resmi siswa yang bertugas mengkoordinir kegiatan siswa di lingkungan sekolah.',
+                    pembina: 'Denis Ahmad Kamil, S.Pd',
+                    pelatih: '-',
+                    ketua: 'Keiza Deswina Azzahra',
+                    anggota: [
+                        {no: 1, nama: 'Keiza Deswina Azzahra', kelas: 'XII IPA 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Ahmad Fauzi', kelas: 'XI IPA 3', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Siti Nurhaliza', kelas: 'XII IPS 2', jabatan: 'Sekretaris'},
+                        {no: 4, nama: 'Dewi Sartika', kelas: 'XI IPS 1', jabatan: 'Bendahara'},
+                        {no: 5, nama: 'Budi Santoso', kelas: 'X IPA 2', jabatan: 'Anggota'}
+                    ],
+                    jadwalKumpulan: 'Setiap Jumat, 14:00 - 16:00 WIB',
+                    program: [
+                        {no: 1, program: 'MPLS (Masa Pengenalan Lingkungan Sekolah)', bulan: 'Juli', keterangan: 'Kegiatan pengenalan untuk siswa baru'},
+                        {no: 2, program: 'Peringatan HUT RI', bulan: 'Agustus', keterangan: 'Lomba-lomba kemerdekaan'},
+                        {no: 3, program: 'Festival Seni Budaya', bulan: 'Oktober', keterangan: 'Pameran karya seni siswa'},
+                        {no: 4, program: 'Bakti Sosial', bulan: 'Desember', keterangan: 'Kegiatan sosial untuk masyarakat'}
+                    ]
+                },
+                'MPK': {
+                    logo: '⚖️',
+                    nama: 'MPK (Majelis Permusyawaratan Kelas)',
+                    tahunBerdiri: '1990',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Lembaga legislatif siswa yang bertugas mengawasi dan memberikan masukan kepada OSIS.',
+                    pembina: 'Denis Ahmad Kamil, S.Pd',
+                    pelatih: '-',
+                    ketua: 'Ayla Fitria Herlambang',
+                    anggota: [
+                        {no: 1, nama: 'Ayla Fitria Herlambang', kelas: 'XII IPS 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Rizki Pratama', kelas: 'XI IPA 2', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Maya Sari', kelas: 'XII IPA 3', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Kamis, 15:00 - 17:00 WIB',
+                    program: [
+                        {no: 1, program: 'Rapat Koordinasi Bulanan', bulan: 'Setiap Bulan', keterangan: 'Koordinasi dengan OSIS'},
+                        {no: 2, program: 'Evaluasi Program OSIS', bulan: 'Semester', keterangan: 'Evaluasi kinerja OSIS'}
+                    ]
+                },
+                'PASSUS': {
+                    logo: '🛡️',
+                    nama: 'PASSUS (Pasukan Khusus)',
+                    tahunBerdiri: '1985',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Organisasi yang bertugas menjaga keamanan dan ketertiban di lingkungan sekolah.',
+                    pembina: 'Riyan Setiawan, S.Pd',
+                    pelatih: 'Barkah Lugina',
+                    ketua: 'Putri Dzakiyah Rafifah',
+                    anggota: [
+                        {no: 1, nama: 'Putri Dzakiyah Rafifah', kelas: 'XII IPA 2', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Andi Wijaya', kelas: 'XI IPS 1', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Doni Saputra', kelas: 'XII IPA 1', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Senin, 15:30 - 17:30 WIB',
+                    program: [
+                        {no: 1, program: 'Patroli Keamanan Sekolah', bulan: 'Setiap Hari', keterangan: 'Menjaga keamanan lingkungan sekolah'},
+                        {no: 2, program: 'Pelatihan Bela Diri', bulan: 'Bulanan', keterangan: 'Pelatihan kemampuan fisik anggota'}
+                    ]
+                },
+                'Pramuka Putra': {
+                    logo: '🏕️',
+                    nama: 'Pramuka Putra',
+                    tahunBerdiri: '1982',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Gerakan kepanduan untuk siswa putra yang mengembangkan karakter dan keterampilan hidup.',
+                    pembina: 'Abdul Gofur, S.Pd. Gr.',
+                    pelatih: '-',
+                    ketua: 'M. Alrizkifa',
+                    anggota: [
+                        {no: 1, nama: 'M. Alrizkifa', kelas: 'XII IPA 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Fajar Ramadhan', kelas: 'XI IPA 2', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Bayu Setiawan', kelas: 'XII IPS 1', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Sabtu, 14:00 - 17:00 WIB',
+                    program: [
+                        {no: 1, program: 'Kemah Bakti', bulan: 'Januari', keterangan: 'Kegiatan kemah dan bakti sosial'},
+                        {no: 2, program: 'Jambore Daerah', bulan: 'Agustus', keterangan: 'Perkemahan besar tingkat daerah'}
+                    ]
+                },
+                'Pramuka Putri': {
+                    logo: '🏕️',
+                    nama: 'Pramuka Putri',
+                    tahunBerdiri: '1982',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Gerakan kepanduan untuk siswa putri yang mengembangkan karakter dan keterampilan hidup.',
+                    pembina: 'Ratih Yuniati, S.Pd',
+                    pelatih: '-',
+                    ketua: 'Putri',
+                    anggota: [
+                        {no: 1, nama: 'Putri', kelas: 'XII IPS 2', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Sari Dewi', kelas: 'XI IPA 1', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Nia Ramadhani', kelas: 'XII IPA 2', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Sabtu, 14:00 - 17:00 WIB',
+                    program: [
+                        {no: 1, program: 'Kemah Bakti', bulan: 'Januari', keterangan: 'Kegiatan kemah dan bakti sosial'},
+                        {no: 2, program: 'Jambore Daerah', bulan: 'Agustus', keterangan: 'Perkemahan besar tingkat daerah'}
+                    ]
+                },
+                'PMR': {
+                    logo: '⛑️',
+                    nama: 'PMR (Palang Merah Remaja)',
+                    tahunBerdiri: '1985',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Organisasi kemanusiaan yang bergerak dalam bidang kesehatan dan pertolongan pertama.',
+                    pembina: 'Deshinta Nugraheni, S.Pd',
+                    pelatih: 'Asep Dadan Pirumansyah',
+                    ketua: 'Intan Nurjanah',
+                    anggota: [
+                        {no: 1, nama: 'Intan Nurjanah', kelas: 'XII IPA 3', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Rina Sari', kelas: 'XI IPS 2', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Dika Pratama', kelas: 'XII IPS 1', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Rabu, 15:00 - 17:00 WIB',
+                    program: [
+                        {no: 1, program: 'Pelatihan P3K Dasar', bulan: 'Januari', keterangan: 'Pelatihan pertolongan pertama pada kecelakaan'},
+                        {no: 2, program: 'Donor Darah', bulan: 'Maret', keterangan: 'Kegiatan donor darah untuk masyarakat'}
+                    ]
+                },
+                'HISSPA': {
+                    logo: '🏔️',
+                    nama: 'HISSPA (Himpunan Siswa Pecinta Alam)',
+                    tahunBerdiri: '1990',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Organisasi yang bergerak dalam bidang pencintaan alam dan lingkungan hidup.',
+                    pembina: 'Angelina Eka Noviana Sofyan, S.Pd',
+                    pelatih: '-',
+                    ketua: 'Intan Laura Purnamasari Putri Rahbani',
+                    anggota: [
+                        {no: 1, nama: 'Intan Laura Purnamasari Putri Rahbani', kelas: 'XII IPA 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Eko Prasetyo', kelas: 'XI IPA 3', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Lina Marlina', kelas: 'XII IPS 2', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Minggu, 07:00 - 10:00 WIB',
+                    program: [
+                        {no: 1, program: 'Pendakian Gunung', bulan: 'Februari', keterangan: 'Kegiatan pendakian dan eksplorasi alam'},
+                        {no: 2, program: 'Penanaman Pohon', bulan: 'November', keterangan: 'Aksi penghijauan lingkungan sekolah'}
+                    ]
+                },
+                'FSRI': {
+                    logo: '☪️',
+                    nama: 'FSRI (Forum Studi dan Riset Islam)',
+                    tahunBerdiri: '1995',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Forum kajian dan penelitian tentang Islam dan nilai-nilai keislaman.',
+                    pembina: 'Muhamad Ridwan, S.Pd.I',
+                    pelatih: 'Cecep Ghozali Rahmatulloh',
+                    ketua: 'Jani Septiyani',
+                    anggota: [
+                        {no: 1, nama: 'Jani Septiyani', kelas: 'XII IPS 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Ahmad Firdaus', kelas: 'XI IPA 2', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Fatimah Zahra', kelas: 'XII IPA 3', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Jumat, 13:00 - 15:00 WIB',
+                    program: [
+                        {no: 1, program: 'Kajian Rutin', bulan: 'Setiap Minggu', keterangan: 'Kajian keislaman mingguan'},
+                        {no: 2, program: 'Pesantren Kilat', bulan: 'Ramadhan', keterangan: 'Kegiatan keagamaan intensif'}
+                    ]
+                },
+                'KIR': {
+                    logo: '🔬',
+                    nama: 'KIR (Karya Ilmiah Remaja)',
+                    tahunBerdiri: '2000',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Wadah pengembangan kemampuan penelitian dan karya ilmiah siswa.',
+                    pembina: 'Sopian Priatna, S.Kom',
+                    pelatih: '-',
+                    ketua: 'Bayu Sapto Hardiyansyah',
+                    anggota: [
+                        {no: 1, nama: 'Bayu Sapto Hardiyansyah', kelas: 'XII IPA 2', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Indira Sari', kelas: 'XI IPA 1', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Reza Pratama', kelas: 'XII IPA 3', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Selasa, 15:30 - 17:30 WIB',
+                    program: [
+                        {no: 1, program: 'Penelitian Sains', bulan: 'Maret', keterangan: 'Proyek penelitian ilmiah'},
+                        {no: 2, program: 'Lomba KIR Nasional', bulan: 'September', keterangan: 'Kompetisi karya ilmiah tingkat nasional'}
+                    ]
+                },
+                'AKSI': {
+                    logo: '🤝',
+                    nama: 'AKSI (Aksi Sosial)',
+                    tahunBerdiri: '2007',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Organisasi yang bergerak dalam bidang kegiatan sosial dan kemasyarakatan.',
+                    pembina: 'Muhamad Reza, S.Pd',
+                    pelatih: '-',
+                    ketua: 'Frisca Mozza',
+                    anggota: [
+                        {no: 1, nama: 'Frisca Mozza', kelas: 'XII IPS 2', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Dani Setiawan', kelas: 'XI IPS 1', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Sinta Dewi', kelas: 'XII IPA 1', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Sabtu, 09:00 - 12:00 WIB',
+                    program: [
+                        {no: 1, program: 'Bakti Sosial', bulan: 'April', keterangan: 'Kegiatan sosial untuk masyarakat'},
+                        {no: 2, program: 'Santunan Anak Yatim', bulan: 'Desember', keterangan: 'Pemberian santunan kepada anak yatim'}
+                    ]
+                },
+                'Marching Band': {
+                    logo: '🎺',
+                    nama: 'Marching Band',
+                    tahunBerdiri: '2007',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Grup musik parade yang menampilkan pertunjukan musik sambil berbaris.',
+                    pembina: 'Muhamad Reza, S.Pd',
+                    pelatih: '-',
+                    ketua: 'Frisca Mozza',
+                    anggota: [
+                        {no: 1, nama: 'Frisca Mozza', kelas: 'XII IPS 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Andi Mustofa', kelas: 'XI IPA 2', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Rina Sari', kelas: 'XII IPA 3', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Selasa & Kamis, 15:00 - 18:00 WIB',
+                    program: [
+                        {no: 1, program: 'Latihan Rutin', bulan: 'Januari', keterangan: 'Persiapan untuk kompetisi regional'},
+                        {no: 2, program: 'Parade HUT RI', bulan: 'Agustus', keterangan: 'Penampilan dalam perayaan kemerdekaan'}
+                    ]
+                },
+                'Basket ball': {
+                    logo: '🏀',
+                    nama: 'Basket Ball',
+                    tahunBerdiri: '1998',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Tim olahraga bola basket sekolah yang aktif dalam berbagai kompetisi.',
+                    pembina: 'Bayu Eryreisa, S.Pd',
+                    pelatih: 'Agung Firmansyah',
+                    ketua: 'Fauzan Nurzaman',
+                    anggota: [
+                        {no: 1, nama: 'Fauzan Nurzaman', kelas: 'XII IPA 1', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Ricky Pratama', kelas: 'XI IPA 2', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Doni Saputra', kelas: 'XII IPS 1', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Senin, Rabu, Jumat 15:30 - 18:00 WIB',
+                    program: [
+                        {no: 1, program: 'Turnamen Antar Kelas', bulan: 'Januari', keterangan: 'Kompetisi basket ball tingkat sekolah'},
+                        {no: 2, program: 'Liga Pelajar', bulan: 'Juni', keterangan: 'Kompetisi antar sekolah se-kabupaten'}
+                    ]
+                },
+                'Futsal Putra': {
+                    logo: '⚽',
+                    nama: 'Futsal Putra',
+                    tahunBerdiri: '2008',
+                    masaBakti: '2025-2026',
+                    deskripsi: 'Tim futsal putra yang aktif dalam berbagai turnamen dan kompetisi.',
+                    pembina: 'Agus Gustiawan Jaelani, S.Pd',
+                    pelatih: 'Andika Sunadi',
+                    ketua: 'Fauzan Nurzaman',
+                    anggota: [
+                        {no: 1, nama: 'Fauzan Nurzaman', kelas: 'XII IPA 2', jabatan: 'Ketua'},
+                        {no: 2, nama: 'Bayu Setiawan', kelas: 'XI IPS 1', jabatan: 'Wakil Ketua'},
+                        {no: 3, nama: 'Andi Wijaya', kelas: 'XII IPA 1', jabatan: 'Sekretaris'}
+                    ],
+                    jadwalKumpulan: 'Setiap Selasa & Kamis, 15:30 - 18:00 WIB',
+                    program: [
+                        {no: 1, program: 'Liga Futsal Sekolah', bulan: 'Januari', keterangan: 'Pertandingan futsal antar organisasi'},
+                        {no: 2, program: 'Turnamen Antar SMA', bulan: 'Mei', keterangan: 'Kompetisi futsal tingkat kabupaten'}
+                    ]
+                }
+            };
+
+            const data = orgData[orgName] || orgData['OSIS'];
+            
+            content.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="lg:col-span-1">
+                        <div class="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6 text-center">
+                            <div class="text-6xl mb-4" id="orgLogo">${data.logo}</div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">${data.nama}</h3>
+                            <p class="text-gray-600">Berdiri sejak ${data.tahunBerdiri}</p>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Deskripsi</h4>
+                                <p class="text-gray-600 leading-relaxed" id="orgDeskripsi">${data.deskripsi}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Masa Bakti</h4>
+                                <p class="text-gray-600" id="orgMasaBakti">${data.masaBakti}</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Pembina</h4>
+                                <p class="text-gray-600" id="orgPembina">${data.pembina}</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Ketua</h4>
+                                <p class="text-gray-600" id="orgKetua">${data.ketua}</p>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-800 mb-2">Jadwal Kumpulan</h4>
+                                <p class="text-gray-600" id="orgJadwal">${data.jadwalKumpulan}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2">
+                        
+                        <div class="mb-6">
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="text-lg font-semibold text-gray-800">Daftar Anggota</h4>
+                                <div class="space-x-2" id="anggotaButtons" style="display: none;">
+                                    <button onclick="addAnggotaRow()" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">Tambah Anggota</button>
+                                    <button onclick="saveAnggotaChanges()" class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">Simpan</button>
+                                    <button onclick="cancelAnggotaEdit()" class="bg-gray-500 text-white px-3 py-1 rounded text-sm hover:bg-gray-600">Batal</button>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse border border-gray-300" id="anggotaTable">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="border border-gray-300 px-4 py-2 text-left">No.</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left">Nama</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left">Kelas</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left">Jabatan</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left" id="anggotaActionHeader" style="display: none;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${data.anggota.map(anggota => `
+                                            <tr>
+                                                <td class="border border-gray-300 px-4 py-2">${anggota.no}</td>
+                                                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="nama">${anggota.nama}</td>
+                                                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="kelas">${anggota.kelas}</td>
+                                                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="jabatan">${anggota.jabatan}</td>
+                                                <td class="border border-gray-300 px-4 py-2 anggota-action-cell" style="display: none;">
+                                                    <button onclick="removeAnggotaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <h4 class="text-lg font-semibold text-gray-800">Program Kegiatan</h4>
+                                <div class="space-x-2" id="programButtons" style="display: none;">
+                                    <button onclick="addProgramRow()" class="bg-blue-500 text-white px-3 py-1 rounded text-sm hover:bg-blue-600">Tambah Program</button>
+                                    <button onclick="saveProgramChanges()" class="bg-green-500 text-white px-3 py-1 rounded text-sm hover:bg-green-600">Simpan</button>
+                                    <button onclick="cancelProgramEdit()" class="bg-gray-500 text-white px-3 py-1 rounded text-sm hover:bg-gray-600">Batal</button>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="w-full border-collapse border border-gray-300" id="programTable">
+                                    <thead>
+                                        <tr class="bg-gray-50">
+                                            <th class="border border-gray-300 px-4 py-2 text-left">No.</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left">Program</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left">Bulan</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left">Keterangan</th>
+                                            <th class="border border-gray-300 px-4 py-2 text-left" id="programActionHeader" style="display: none;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${data.program.map(prog => `
+                                            <tr>
+                                                <td class="border border-gray-300 px-4 py-2">${prog.no}</td>
+                                                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="program">${prog.program}</td>
+                                                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="bulan">${prog.bulan}</td>
+                                                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="keterangan">${prog.keterangan}</td>
+                                                <td class="border border-gray-300 px-4 py-2 program-action-cell" style="display: none;">
+                                                    <button onclick="removeProgramRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function hideDetailOrganisasi() {
+            document.getElementById('detailOrganisasiModal').classList.add('hidden');
+        }
+
+        function showLoginModal(action) {
+            currentLoginAction = action;
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function hideLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+        }
+
+        let isEditMode = false;
+        
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple validation (in real app, this would be server-side)
+            if (username && password) {
+                hideLoginModal();
+                
+                // Clear form
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                
+                // Show appropriate form based on action
+                if (currentLoginAction === 'proposal') {
+                    showProposalForm();
+                } else if (currentLoginAction === 'dispensasi') {
+                    showDispensasiForm();
+                } else if (currentLoginAction === 'laporan') {
+                    showLaporanForm();
+                } else if (currentLoginAction === 'log') {
+                    showLogAktivitasData();
+                } else if (currentLoginAction === 'edit') {
+                    enableEditMode();
+                }
+            }
+        }
+        
+        function enableEditMode() {
+            isEditMode = true;
+            alert('Mode edit telah diaktifkan! Klik pada logo, deskripsi, atau data lainnya untuk mengedit.');
+            
+            // Make elements editable
+            makeElementEditable('orgLogo', 'Logo (emoji)');
+            makeElementEditable('orgDeskripsi', 'Deskripsi');
+            makeElementEditable('orgMasaBakti', 'Masa Bakti');
+            makeElementEditable('orgPembina', 'Pembina');
+            makeElementEditable('orgKetua', 'Ketua');
+            makeElementEditable('orgJadwal', 'Jadwal Kumpulan');
+            
+            // Show table action buttons
+            document.getElementById('anggotaButtons').style.display = 'block';
+            document.getElementById('programButtons').style.display = 'block';
+            document.getElementById('anggotaActionHeader').style.display = 'table-cell';
+            document.getElementById('programActionHeader').style.display = 'table-cell';
+            
+            // Show action cells
+            document.querySelectorAll('.anggota-action-cell').forEach(cell => {
+                cell.style.display = 'table-cell';
+            });
+            document.querySelectorAll('.program-action-cell').forEach(cell => {
+                cell.style.display = 'table-cell';
+            });
+            
+            // Make table cells editable
+            document.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.style.cursor = 'pointer';
+                cell.style.backgroundColor = '#fef3c7';
+                cell.title = 'Klik untuk mengedit';
+                
+                cell.addEventListener('click', function() {
+                    if (isEditMode) {
+                        editTableCell(this);
+                    }
+                });
+            });
+        }
+        
+        function makeElementEditable(elementId, fieldName) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.style.cursor = 'pointer';
+                element.style.backgroundColor = '#fef3c7';
+                element.style.padding = '4px';
+                element.style.borderRadius = '4px';
+                element.title = `Klik untuk mengedit ${fieldName}`;
+                
+                element.addEventListener('click', function() {
+                    if (isEditMode) {
+                        editElement(this, fieldName);
+                    }
+                });
+            }
+        }
+        
+        function editElement(element, fieldName) {
+            const currentValue = element.textContent;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+            input.className = 'w-full px-2 py-1 border border-blue-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-500';
+            
+            element.innerHTML = '';
+            element.appendChild(input);
+            input.focus();
+            input.select();
+            
+            function saveEdit() {
+                const newValue = input.value.trim();
+                if (newValue) {
+                    element.textContent = newValue;
+                    element.style.backgroundColor = '#dcfce7'; // Green background to show it's saved
+                    setTimeout(() => {
+                        element.style.backgroundColor = '#fef3c7';
+                    }, 1000);
+                } else {
+                    element.textContent = currentValue;
+                }
+            }
+            
+            input.addEventListener('blur', saveEdit);
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveEdit();
+                }
+            });
+        }
+        
+        function editTableCell(cell) {
+            const currentValue = cell.textContent;
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = currentValue;
+            input.className = 'w-full px-2 py-1 border border-blue-500 rounded focus:outline-none focus:ring-2 focus:ring-blue-500';
+            
+            cell.innerHTML = '';
+            cell.appendChild(input);
+            input.focus();
+            input.select();
+            
+            function saveEdit() {
+                const newValue = input.value.trim();
+                if (newValue) {
+                    cell.textContent = newValue;
+                    cell.style.backgroundColor = '#dcfce7'; // Green background to show it's saved
+                    setTimeout(() => {
+                        cell.style.backgroundColor = '#fef3c7';
+                    }, 1000);
+                } else {
+                    cell.textContent = currentValue;
+                }
+            }
+            
+            input.addEventListener('blur', saveEdit);
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    saveEdit();
+                }
+            });
+        }
+
+        function showProposalForm() {
+            const modal = document.getElementById('formModal');
+            const title = document.getElementById('formModalTitle');
+            const content = document.getElementById('formModalContent');
+            
+            title.textContent = 'Pengajuan Proposal Kegiatan';
+            
+            content.innerHTML = `
+                <form onsubmit="handleProposalSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilihan Organisasi</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Organisasi</option>
+                                <option value="OSIS">OSIS</option>
+                                <option value="MPK">MPK</option>
+                                <option value="PASSUS">PASSUS</option>
+                                <option value="Pramuka">Pramuka</option>
+                                <option value="PMR">PMR</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kegiatan</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Pembina / Penanggung Jawab</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Latar Belakang Kegiatan</label>
+                        <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Dasar Kegiatan</label>
+                        <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tujuan Kegiatan</label>
+                        <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Manfaat Kegiatan</label>
+                        <textarea rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Susunan Panitia</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300" id="panitiaTable">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-2">Jabatan</th>
+                                        <th class="border border-gray-300 px-4 py-2">Nama</th>
+                                        <th class="border border-gray-300 px-4 py-2">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="border border-gray-300 px-4 py-2">Penanggung Jawab</td><td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td><td class="border border-gray-300 px-4 py-2"><button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button></td></tr>
+                                    <tr><td class="border border-gray-300 px-4 py-2">Pengarah</td><td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td><td class="border border-gray-300 px-4 py-2"><button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button></td></tr>
+                                    <tr><td class="border border-gray-300 px-4 py-2">Ketua Panitia</td><td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td><td class="border border-gray-300 px-4 py-2"><button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button></td></tr>
+                                    <tr><td class="border border-gray-300 px-4 py-2">Sekretaris</td><td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td><td class="border border-gray-300 px-4 py-2"><button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button></td></tr>
+                                    <tr><td class="border border-gray-300 px-4 py-2">Bendahara</td><td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td><td class="border border-gray-300 px-4 py-2"><button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button></td></tr>
+                                    <tr><td class="border border-gray-300 px-4 py-2">Koordinator Seksi</td><td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td><td class="border border-gray-300 px-4 py-2"><button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" onclick="addPanitiaRow()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Tambah Panitia</button>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Rencana Anggaran Biaya</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300" id="anggaranTable">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-2">No.</th>
+                                        <th class="border border-gray-300 px-4 py-2">Uraian</th>
+                                        <th class="border border-gray-300 px-4 py-2">Jumlah</th>
+                                        <th class="border border-gray-300 px-4 py-2">Harga Satuan</th>
+                                        <th class="border border-gray-300 px-4 py-2">Total</th>
+                                        <th class="border border-gray-300 px-4 py-2">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-2">1</td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Contoh: Konsumsi"></td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="number" class="w-full px-2 py-1 border-0 focus:outline-none anggaran-qty" placeholder="50"></td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="number" class="w-full px-2 py-1 border-0 focus:outline-none anggaran-price" placeholder="15000"></td>
+                                        <td class="border border-gray-300 px-4 py-2 anggaran-total">Rp 0</td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button type="button" onclick="removeAnggaranRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr class="bg-gray-50 font-semibold">
+                                        <td colspan="4" class="border border-gray-300 px-4 py-2 text-right">Total Keseluruhan:</td>
+                                        <td class="border border-gray-300 px-4 py-2" id="grandTotal">Rp 0</td>
+                                        <td class="border border-gray-300 px-4 py-2"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <button type="button" onclick="addAnggaranRow()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Tambah Item Anggaran</button>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Peralatan dan Sarana Prasarana</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300" id="sarPrasTable">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-2">No.</th>
+                                        <th class="border border-gray-300 px-4 py-2">Nama Peralatan/Sarana</th>
+                                        <th class="border border-gray-300 px-4 py-2">Jumlah</th>
+                                        <th class="border border-gray-300 px-4 py-2">Sumber</th>
+                                        <th class="border border-gray-300 px-4 py-2">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-2">1</td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Contoh: Sound System"></td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="number" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="1"></td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Sekolah/Sewa/Pribadi"></td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button type="button" onclick="removeSarPrasRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" onclick="addSarPrasRow()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Tambah Peralatan</button>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Penutup</h4>
+                        <textarea rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Demikian proposal ini kami buat dengan sebenar-benarnya. Atas perhatian dan dukungan Bapak/Ibu, kami ucapkan terima kasih." required></textarea>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4 justify-end">
+                        <button type="button" onclick="saveAsDraft()" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600">Save Draft</button>
+                        <button type="button" onclick="previewProposal()" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600">Preview</button>
+                        <button type="button" onclick="exportToDocx()" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">Save as DOCX</button>
+                        <button type="submit" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:shadow-lg">Submit</button>
+                    </div>
+                </form>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function showDispensasiForm() {
+            const modal = document.getElementById('formModal');
+            const title = document.getElementById('formModalTitle');
+            const content = document.getElementById('formModalContent');
+            
+            title.textContent = 'Pengajuan Dispensasi';
+            
+            content.innerHTML = `
+                <form onsubmit="handleDispensasiSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilihan Organisasi</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Organisasi</option>
+                                <option value="OSIS">OSIS</option>
+                                <option value="MPK">MPK</option>
+                                <option value="PASSUS">PASSUS</option>
+                                <option value="Pramuka">Pramuka</option>
+                                <option value="PMR">PMR</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kegiatan</label>
+                            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Pembina / Penanggung Jawab</label>
+                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Daftar Peserta Kegiatan</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-300 px-4 py-2">No.</th>
+                                        <th class="border border-gray-300 px-4 py-2">Nama</th>
+                                        <th class="border border-gray-300 px-4 py-2">Kelas</th>
+                                        <th class="border border-gray-300 px-4 py-2">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pesertaTable">
+                                    <tr>
+                                        <td class="border border-gray-300 px-4 py-2">1</td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td>
+                                        <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td>
+                                        <td class="border border-gray-300 px-4 py-2">
+                                            <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700">Hapus</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" onclick="addPesertaRow()" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Tambah Peserta</button>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:shadow-lg">Submit</button>
+                    </div>
+                </form>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function showLaporanForm() {
+            const modal = document.getElementById('formModal');
+            const title = document.getElementById('formModalTitle');
+            const content = document.getElementById('formModalContent');
+            
+            title.textContent = 'Laporan Kegiatan';
+            
+            content.innerHTML = `
+                <form onsubmit="handleLaporanSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilihan Organisasi</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Organisasi</option>
+                                <option value="OSIS">OSIS</option>
+                                <option value="MPK">MPK</option>
+                                <option value="PASSUS">PASSUS</option>
+                                <option value="Pramuka">Pramuka</option>
+                                <option value="PMR">PMR</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Pilihan Nama Kegiatan</label>
+                            <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <option value="">Pilih Kegiatan</option>
+                                <option value="MPLS">MPLS</option>
+                                <option value="HUT RI">Peringatan HUT RI</option>
+                                <option value="Festival Seni">Festival Seni Budaya</option>
+                                <option value="Baksos">Bakti Sosial</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Link Google Drive (File PDF Laporan)</label>
+                        <input type="url" placeholder="https://drive.google.com/..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <p class="text-sm text-gray-500 mt-1">Pastikan file dapat diakses oleh siapa saja dengan link</p>
+                    </div>
+                    
+                    <div class="flex justify-end">
+                        <button type="submit" class="bg-gradient-to-r from-green-500 to-blue-600 text-white px-6 py-2 rounded-lg hover:shadow-lg">Submit</button>
+                    </div>
+                </form>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function showLogAktivitasData() {
+            const modal = document.getElementById('formModal');
+            const title = document.getElementById('formModalTitle');
+            const content = document.getElementById('formModalContent');
+            
+            title.textContent = 'Log Aktivitas Sistem';
+            
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center">
+                        <p class="text-gray-600">Menampilkan aktivitas sistem terbaru</p>
+                        <button onclick="downloadLogExcel()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 flex items-center space-x-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span>Download XLSX</span>
+                        </button>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-gray-300">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Tanggal</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Waktu</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">User</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Aktivitas</th>
+                                    <th class="border border-gray-300 px-4 py-2 text-left">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">2024-01-15</td>
+                                    <td class="border border-gray-300 px-4 py-2">14:30:25</td>
+                                    <td class="border border-gray-300 px-4 py-2">admin_osis</td>
+                                    <td class="border border-gray-300 px-4 py-2">Login ke sistem</td>
+                                    <td class="border border-gray-300 px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Berhasil</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">2024-01-15</td>
+                                    <td class="border border-gray-300 px-4 py-2">14:32:10</td>
+                                    <td class="border border-gray-300 px-4 py-2">admin_osis</td>
+                                    <td class="border border-gray-300 px-4 py-2">Update profil organisasi OSIS</td>
+                                    <td class="border border-gray-300 px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Berhasil</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">2024-01-15</td>
+                                    <td class="border border-gray-300 px-4 py-2">15:15:45</td>
+                                    <td class="border border-gray-300 px-4 py-2">ketua_pmr</td>
+                                    <td class="border border-gray-300 px-4 py-2">Submit proposal kegiatan</td>
+                                    <td class="border border-gray-300 px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Berhasil</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">2024-01-15</td>
+                                    <td class="border border-gray-300 px-4 py-2">16:20:30</td>
+                                    <td class="border border-gray-300 px-4 py-2">admin_pramuka</td>
+                                    <td class="border border-gray-300 px-4 py-2">Upload laporan kegiatan</td>
+                                    <td class="border border-gray-300 px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">Berhasil</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 px-4 py-2">2024-01-14</td>
+                                    <td class="border border-gray-300 px-4 py-2">09:45:12</td>
+                                    <td class="border border-gray-300 px-4 py-2">user_test</td>
+                                    <td class="border border-gray-300 px-4 py-2">Percobaan login</td>
+                                    <td class="border border-gray-300 px-4 py-2"><span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">Gagal</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+        }
+
+        function hideFormModal() {
+            document.getElementById('formModal').classList.add('hidden');
+        }
+
+        // Form submission handlers
+        function handleProposalSubmit(event) {
+            event.preventDefault();
+            alert('Proposal berhasil disubmit! Tim akan meninjau proposal Anda.');
+            hideFormModal();
+        }
+
+        function handleDispensasiSubmit(event) {
+            event.preventDefault();
+            alert('Pengajuan dispensasi berhasil disubmit!');
+            hideFormModal();
+        }
+
+        function handleLaporanSubmit(event) {
+            event.preventDefault();
+            alert('Laporan kegiatan berhasil disubmit!');
+            hideFormModal();
+        }
+
+        // Utility functions
+        function addPesertaRow() {
+            const table = document.getElementById('pesertaTable');
+            const rowCount = table.rows.length + 1;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-4 py-2">${rowCount}</td>
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td>
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none"></td>
+                <td class="border border-gray-300 px-4 py-2">
+                    <button type="button" onclick="removeRow(this)" class="text-red-500 hover:text-red-700">Hapus</button>
+                </td>
+            `;
+        }
+
+        function removeRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            
+            // Renumber rows
+            const table = document.getElementById('pesertaTable');
+            const rows = table.rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+        }
+
+        function saveAsDraft() {
+            alert('Draft berhasil disimpan!');
+        }
+
+        function previewProposal() {
+            alert('Fitur preview akan menampilkan proposal dalam format yang siap dicetak.');
+        }
+
+        function exportToDocx() {
+            alert('Proposal berhasil diexport ke format DOCX!');
+        }
+
+        function downloadLogExcel() {
+            alert('Log aktivitas berhasil didownload dalam format XLSX!');
+        }
+        
+        // Functions for managing anggota
+        function addAnggotaRow() {
+            const table = document.getElementById('anggotaTable').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length + 1;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-4 py-2">${rowCount}</td>
+                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="nama">Nama Baru</td>
+                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="kelas">Kelas</td>
+                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="jabatan">Jabatan</td>
+                <td class="border border-gray-300 px-4 py-2 anggota-action-cell">
+                    <button onclick="removeAnggotaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                </td>
+            `;
+            
+            // Make new cells editable
+            newRow.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.style.cursor = 'pointer';
+                cell.style.backgroundColor = '#fef3c7';
+                cell.title = 'Klik untuk mengedit';
+                
+                cell.addEventListener('click', function() {
+                    if (isEditMode) {
+                        editTableCell(this);
+                    }
+                });
+            });
+        }
+        
+        function removeAnggotaRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            
+            // Renumber rows
+            const table = document.getElementById('anggotaTable').getElementsByTagName('tbody')[0];
+            const rows = table.rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+        }
+        
+        function saveAnggotaChanges() {
+            alert('Perubahan data anggota berhasil disimpan!');
+            // Here you would typically send data to server
+        }
+        
+        function cancelAnggotaEdit() {
+            if (confirm('Batalkan semua perubahan pada data anggota?')) {
+                location.reload(); // Simple way to reset - in real app, restore from backup
+            }
+        }
+        
+        // Functions for managing program
+        function addProgramRow() {
+            const table = document.getElementById('programTable').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length + 1;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-4 py-2">${rowCount}</td>
+                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="program">Program Baru</td>
+                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="bulan">Bulan</td>
+                <td class="border border-gray-300 px-4 py-2 editable-cell" data-field="keterangan">Keterangan</td>
+                <td class="border border-gray-300 px-4 py-2 program-action-cell">
+                    <button onclick="removeProgramRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                </td>
+            `;
+            
+            // Make new cells editable
+            newRow.querySelectorAll('.editable-cell').forEach(cell => {
+                cell.style.cursor = 'pointer';
+                cell.style.backgroundColor = '#fef3c7';
+                cell.title = 'Klik untuk mengedit';
+                
+                cell.addEventListener('click', function() {
+                    if (isEditMode) {
+                        editTableCell(this);
+                    }
+                });
+            });
+        }
+        
+        function removeProgramRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            
+            // Renumber rows
+            const table = document.getElementById('programTable').getElementsByTagName('tbody')[0];
+            const rows = table.rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+        }
+        
+        function saveProgramChanges() {
+            alert('Perubahan data program kegiatan berhasil disimpan!');
+            // Here you would typically send data to server
+        }
+        
+        function cancelProgramEdit() {
+            if (confirm('Batalkan semua perubahan pada data program kegiatan?')) {
+                location.reload(); // Simple way to reset - in real app, restore from backup
+            }
+        }
+        
+        // Functions for anggaran table
+        function addAnggaranRow() {
+            const table = document.getElementById('anggaranTable').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length + 1;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-4 py-2">${rowCount}</td>
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Uraian item"></td>
+                <td class="border border-gray-300 px-4 py-2"><input type="number" class="w-full px-2 py-1 border-0 focus:outline-none anggaran-qty" placeholder="1" onchange="calculateRowTotal(this)"></td>
+                <td class="border border-gray-300 px-4 py-2"><input type="number" class="w-full px-2 py-1 border-0 focus:outline-none anggaran-price" placeholder="0" onchange="calculateRowTotal(this)"></td>
+                <td class="border border-gray-300 px-4 py-2 anggaran-total">Rp 0</td>
+                <td class="border border-gray-300 px-4 py-2">
+                    <button type="button" onclick="removeAnggaranRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                </td>
+            `;
+        }
+        
+        function removeAnggaranRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            
+            // Renumber rows
+            const table = document.getElementById('anggaranTable').getElementsByTagName('tbody')[0];
+            const rows = table.rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+            
+            calculateGrandTotal();
+        }
+        
+        function calculateRowTotal(input) {
+            const row = input.closest('tr');
+            const qty = row.querySelector('.anggaran-qty').value || 0;
+            const price = row.querySelector('.anggaran-price').value || 0;
+            const total = qty * price;
+            
+            row.querySelector('.anggaran-total').textContent = 'Rp ' + total.toLocaleString('id-ID');
+            calculateGrandTotal();
+        }
+        
+        function calculateGrandTotal() {
+            const table = document.getElementById('anggaranTable');
+            const rows = table.getElementsByTagName('tbody')[0].rows;
+            let grandTotal = 0;
+            
+            for (let i = 0; i < rows.length; i++) {
+                const qty = rows[i].querySelector('.anggaran-qty').value || 0;
+                const price = rows[i].querySelector('.anggaran-price').value || 0;
+                grandTotal += qty * price;
+            }
+            
+            document.getElementById('grandTotal').textContent = 'Rp ' + grandTotal.toLocaleString('id-ID');
+        }
+        
+        // Functions for sarana prasarana table
+        function addSarPrasRow() {
+            const table = document.getElementById('sarPrasTable').getElementsByTagName('tbody')[0];
+            const rowCount = table.rows.length + 1;
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-4 py-2">${rowCount}</td>
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Nama peralatan"></td>
+                <td class="border border-gray-300 px-4 py-2"><input type="number" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="1"></td>
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Sekolah/Sewa/Pribadi"></td>
+                <td class="border border-gray-300 px-4 py-2">
+                    <button type="button" onclick="removeSarPrasRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                </td>
+            `;
+        }
+        
+        function removeSarPrasRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+            
+            // Renumber rows
+            const table = document.getElementById('sarPrasTable').getElementsByTagName('tbody')[0];
+            const rows = table.rows;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+        }
+        
+        // Functions for panitia table
+        function addPanitiaRow() {
+            const table = document.getElementById('panitiaTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            newRow.innerHTML = `
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Jabatan baru"></td>
+                <td class="border border-gray-300 px-4 py-2"><input type="text" class="w-full px-2 py-1 border-0 focus:outline-none" placeholder="Nama"></td>
+                <td class="border border-gray-300 px-4 py-2">
+                    <button type="button" onclick="removePanitiaRow(this)" class="text-red-500 hover:text-red-700 text-sm">Hapus</button>
+                </td>
+            `;
+        }
+        
+        function removePanitiaRow(button) {
+            const row = button.closest('tr');
+            row.remove();
+        }
+        
+        // Add event listeners for existing anggaran inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add change listeners to existing anggaran inputs
+            document.querySelectorAll('.anggaran-qty, .anggaran-price').forEach(input => {
+                input.addEventListener('change', function() {
+                    calculateRowTotal(this);
+                });
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98739a6481411333',t:'MTc1OTIzNDA3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
